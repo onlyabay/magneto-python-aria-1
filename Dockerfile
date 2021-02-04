@@ -4,11 +4,10 @@ WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
 
 RUN apt-get -qq update && \
-    DEBIAN_FRONTEND="noninteractive" apt-get install -y && \
-    rm -rf /var/lib/apt/lists/* && \
-    apt-get -qq update && \
-    apt-get -qq install -y p7zip-full p7zip-rar aria2 curl pv jq ffmpeg locales python3-lxml && \
-    DEBIAN_FRONTEND="noninteractive" apt-get purge -y
+    DEBIAN_FRONTEND="noninteractive" apt-get -qq install -y p7zip-full p7zip-rar aria2 wget curl pv jq ffmpeg locales python3-lxml && \
+    rm -rf /var/lib/apt/lists/* \
+    apt-get purge -y software-properties-common
+
 
 COPY requirements.txt .
 COPY extract /usr/local/bin
